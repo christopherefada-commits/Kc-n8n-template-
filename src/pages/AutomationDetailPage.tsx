@@ -1,16 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  ArrowLeft,
-  Clock,
-  GitBranch,
-  Package,
-  CheckCircle2,
-  AlertCircle,
-  Loader2,
-  Settings,
-  Zap,
-} from "lucide-react";
+import { ArrowLeft, Clock, GitBranch, Package, CircleCheck as CheckCircle2, CircleAlert as AlertCircle, Loader as Loader2, Settings, Zap } from "lucide-react";
 import {
   loadAutomation,
   ConfigurationEngine,

@@ -1,74 +1,116 @@
 import { useEffect, useState } from "react";
-import { Rocket, GitBranch } from "lucide-react";
+import { Rocket, GitBranch, RefreshCw } from "lucide-react";
+import { PageHeader, EmptyState } from "@/components/common";
+import { Card, CardHeader, Badge, Button } from "@/components/ui";
 import { listDeployments, loadCatalog, type AutomationCatalog } from "@platform";
 import type { Deployment } from "@platform";
+import { useApp } from "@/state/AppContext";
 
 export function DeploymentsPage() {
+  const { showToast } = useApp();
   const [deployments, setDeployments] = useState<Deployment[]>([]);
   const [catalog, setCatalog] = useState<AutomationCatalog | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+
+  async function load() {
+    setLoading(true);
+    try {
+      const [deps, cat] = await Promise.all([listDeployments(), loadCatalog()]);
+      setDeployments(deps);
+      setCatalog(cat);
+    } catch {
+      showToast("Failed to load deployments", "error");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   useEffect(() => {
-    Promise.all([listDeployments(), loadCatalog()])
-      .then(([deps, cat]) => {
-        setDeployments(deps);
-        setCatalog(cat);
-      })
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
+    load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  if (loading) return <div className="loading">Loading deployments…</div>;
-  if (error)
-    return (
-      <div className="empty-state">
-        <div className="empty-state-icon">⚠️</div>
-        <p>{error}</p>
-      </div>
-    );
 
   return (
     <div>
-      <div className="page-header">
-        <h1 className="page-title">Deployments</h1>
-        <p className="page-subtitle">
-          All automations you have deployed with injected configurations.
-        </p>
-      </div>
+      <PageHeader
+        title="Deployments"
+        subtitle="Manage your deployed automations and their status."
+        action={
+          <Button variant="secondary" onClick={load} disabled={loading}>
+            <RefreshCw size={16} className={loading ? "spin" : ""} /> Refresh
+          </Button>
+        }
+      />
 
-      {deployments.length === 0 ? (
-        <div className="empty-state">
-          <Rocket size={48} color="var(--color-text-dim)" />
-          <p style={{ marginTop: 16 }}>No deployments yet.</p>
-          <p style={{ fontSize: 14, marginTop: 4 }}>
-            Browse the catalog and deploy an automation to get started.
-          </p>
-        </div>
+      {loading ? (
+        <div className="spinner-container">Loading deployments…</div>
+      ) : deployments.length === 0 ? (
+        <EmptyState
+          icon={<Rocket size={28} />}
+          title="No deployments yet"
+          description="Browse the Marketplace and deploy an automation to get started."
+          action={
+            <Button onClick={() => (window.location.href = "/marketplace")}>
+              Browse Marketplace
+            </Button>
+          }
+        />
       ) : (
-        <div className="deployment-list">
-          {deployments.map((d) => {
-            const auto = catalog?.get(d.automationId);
-            return (
-              <div className="deployment-item" key={d.id}>
-                <span style={{ fontSize: 28 }}>{auto?.icon ?? "⚡"}</span>
-                <div className="deployment-info">
-                  <div className="deployment-name">
-                    {auto?.name ?? d.automationId}
-                  </div>
-                  <div className="deployment-meta">
-                    <span className={`status-dot ${d.status}`} />
-                    {d.status} · {d.nodeCount} nodes ·{" "}
-                    {new Date(d.createdAt).toLocaleString()}
-                  </div>
-                </div>
-                <span className="badge badge-nodes">
-                  <GitBranch size={12} /> {d.nodeCount} nodes
-                </span>
-              </div>
-            );
-          })}
-        </div>
+        <Card>
+          <CardHeader title={`Active Deployments (${deployments.length})`} />
+          <div className="table-wrapper">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Automation</th>
+                  <th>Status</th>
+                  <th>Nodes</th>
+                  <th>Deployed</th>
+                </tr>
+              </thead>
+              <tbody>
+                {deployments.map((d) => {
+                  const auto = catalog?.get(d.automationId);
+                  return (
+                    <tr key={d.id}>
+                      <td>
+                        <div className="flex items-center gap-2">
+                          <span style={{ fontSize: 20 }}>{auto?.icon ?? "⚡"}</span>
+                          <span style={{ fontWeight: 600 }}>
+                            {auto?.name ?? d.automationId}
+                          </span>
+                        </div>
+                      </td>
+                      <td>
+                        <Badge
+                          variant={
+                            d.status === "deployed"
+                              ? "success"
+                              : d.status === "failed"
+                                ? "error"
+                                : d.status === "pending"
+                                  ? "warning"
+                                  : "default"
+                          }
+                        >
+                          {d.status}
+                        </Badge>
+                      </td>
+                      <td>
+                        <span className="flex items-center gap-2 text-muted">
+                          <GitBranch size={13} /> {d.nodeCount}
+                        </span>
+                      </td>
+                      <td className="text-muted text-sm">
+                        {new Date(d.createdAt).toLocaleString()}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </Card>
       )}
     </div>
   );

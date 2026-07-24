@@ -3,6 +3,7 @@ import { DashboardLayout } from "@/components/layout";
 import { ToastContainer } from "@/components/common";
 import { AppProvider } from "@/state/AppContext";
 import { DashboardPage } from "@/pages/DashboardPage";
+import { RepositoryPage } from "@/pages/RepositoryPage";
 import { MarketplacePage } from "@/pages/MarketplacePage";
 import { ConfigurationPage } from "@/pages/ConfigurationPage";
 import { DeploymentsPage } from "@/pages/DeploymentsPage";
@@ -18,6 +19,7 @@ export default function App() {
           <Route element={<DashboardLayout />}>
             <Route index element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/repository" element={<RepositoryPage />} />
             <Route path="/marketplace" element={<MarketplacePage />} />
             <Route path="/configuration" element={<ConfigurationPage />} />
             <Route path="/deployments" element={<DeploymentsPage />} />

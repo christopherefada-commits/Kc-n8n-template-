@@ -8,6 +8,7 @@ export const NAV_SECTIONS = [
     label: "Overview",
     items: [
       { to: "/dashboard", label: "Dashboard", icon: "LayoutDashboard" },
+      { to: "/repository", label: "Repository", icon: "Boxes" },
       { to: "/marketplace", label: "Marketplace", icon: "Store" },
     ],
   },

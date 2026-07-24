@@ -16,6 +16,7 @@ const iconMap: Record<NavIconName, typeof LayoutDashboard> = {
   Settings2,
   Rocket,
   Settings,
+  Boxes,
 };
 
 interface SidebarProps {

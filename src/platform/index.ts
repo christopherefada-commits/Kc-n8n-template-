@@ -19,7 +19,7 @@ export type {
 } from "./types";
 
 export { AutomationCatalog } from "./catalog";
-export type { CatalogFilter } from "./catalog";
+export type { CatalogFilter, CatalogFilter as CatalogQuery, SortKey, CategoryCount, CatalogStats } from "./catalog";
 
 export { ConfigurationEngine } from "./config-engine";
 export type { FormField, FormDefinition, ValidationResult } from "./config-engine";

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Rocket, GitBranch, RefreshCw } from "lucide-react";
+import { Rocket, GitBranch, RefreshCw, FileText } from "lucide-react";
 import { PageHeader, EmptyState } from "@/components/common";
 import { Card, CardHeader, Badge, Button } from "@/components/ui";
 import { listDeployments, loadCatalog, type AutomationCatalog } from "@platform";
@@ -75,7 +75,9 @@ export function DeploymentsPage() {
                     <tr key={d.id}>
                       <td>
                         <div className="flex items-center gap-2">
-                          <span style={{ fontSize: 20 }}>{auto?.icon ?? "⚡"}</span>
+                          <div className="list-item-icon" style={{ width: 28, height: 28 }}>
+                            <FileText size={14} strokeWidth={1.75} />
+                          </div>
                           <span style={{ fontWeight: 600 }}>
                             {auto?.name ?? d.automationId}
                           </span>

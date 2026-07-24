@@ -1,5 +1,5 @@
 import type { Automation } from "@platform";
-import { Clock, GitBranch, Package } from "lucide-react";
+import { Clock, GitBranch, Package, FileText } from "lucide-react";
 
 interface AutomationCardProps {
   automation: Automation;
@@ -9,12 +9,14 @@ interface AutomationCardProps {
 export function AutomationCard({ automation, onClick }: AutomationCardProps) {
   return (
     <div className="card card-hover" onClick={onClick} style={{ cursor: "pointer" }}>
-      <div className="flex items-center gap-2 mb-4">
-        <span style={{ fontSize: 26, flexShrink: 0 }}>{automation.icon}</span>
+      <div className="flex items-center gap-2 mb-3">
+        <div className="list-item-icon" style={{ width: 28, height: 28 }}>
+          <FileText size={15} strokeWidth={1.75} />
+        </div>
         <span
           style={{
             fontWeight: 600,
-            fontSize: 14,
+            fontSize: "13px",
             lineHeight: 1.3,
             display: "-webkit-box",
             WebkitLineClamp: 2,
@@ -26,7 +28,7 @@ export function AutomationCard({ automation, onClick }: AutomationCardProps) {
         </span>
       </div>
       <p
-        className="text-muted text-sm mb-4"
+        className="text-muted text-sm mb-3"
         style={{
           display: "-webkit-box",
           WebkitLineClamp: 3,
@@ -40,13 +42,13 @@ export function AutomationCard({ automation, onClick }: AutomationCardProps) {
       <div className="flex gap-2" style={{ flexWrap: "wrap" }}>
         <span className="badge badge-primary">{automation.category}</span>
         <span className="badge">
-          <Clock size={11} /> {automation.estimatedSetupTime}m
+          <Clock size={10} strokeWidth={1.75} /> {automation.estimatedSetupTime}m
         </span>
         <span className="badge">
-          <GitBranch size={11} /> {automation.nodeCount}
+          <GitBranch size={10} strokeWidth={1.75} /> {automation.nodeCount}
         </span>
         <span className="badge">
-          <Package size={11} /> v{automation.version}
+          <Package size={10} strokeWidth={1.75} /> v{automation.version}
         </span>
       </div>
     </div>
@@ -60,13 +62,9 @@ interface AutomationListItemProps {
 
 export function AutomationListItem({ automation, onClick }: AutomationListItemProps) {
   return (
-    <div
-      className="list-item"
-      onClick={onClick}
-      style={{ cursor: "pointer" }}
-    >
-      <div className="list-item-icon" style={{ fontSize: 18 }}>
-        {automation.icon}
+    <div className="list-item" onClick={onClick} style={{ cursor: "pointer" }}>
+      <div className="list-item-icon" style={{ width: 28, height: 28 }}>
+        <FileText size={14} strokeWidth={1.75} />
       </div>
       <div className="list-item-body">
         <div className="list-item-title">{automation.name}</div>
@@ -75,10 +73,10 @@ export function AutomationListItem({ automation, onClick }: AutomationListItemPr
       <div className="flex gap-2" style={{ flexWrap: "wrap" }}>
         <span className="badge badge-primary">{automation.category}</span>
         <span className="badge">
-          <GitBranch size={11} /> {automation.nodeCount}
+          <GitBranch size={10} strokeWidth={1.75} /> {automation.nodeCount}
         </span>
         <span className="badge">
-          <Clock size={11} /> {automation.estimatedSetupTime}m
+          <Clock size={10} strokeWidth={1.75} /> {automation.estimatedSetupTime}m
         </span>
       </div>
     </div>

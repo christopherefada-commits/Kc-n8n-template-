@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { APP_NAME, NAV_SECTIONS } from "@/lib/constants";
 import type { NavIconName } from "@/lib/constants";
+import { Avatar } from "@/components/ui";
 
 const iconMap: Record<NavIconName, typeof LayoutDashboard> = {
   LayoutDashboard,
@@ -33,8 +34,8 @@ export function Sidebar({ open, onClose }: SidebarProps) {
       />
       <aside className={`sidebar ${open ? "open" : ""}`}>
         <div className="sidebar-brand">
-          <div className="sidebar-brand-icon">
-            <Boxes size={18} strokeWidth={2.5} />
+          <div className="sidebar-brand-mark">
+            <Boxes size={14} strokeWidth={2.5} />
           </div>
           {APP_NAME}
         </div>
@@ -53,7 +54,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                     }
                     onClick={onClose}
                   >
-                    <Icon size={18} />
+                    <Icon size={16} strokeWidth={1.75} />
                     {item.label}
                   </NavLink>
                 );
@@ -62,13 +63,11 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           ))}
         </nav>
         <div className="sidebar-footer">
-          <div className="list-item" style={{ border: "none", padding: "4px 8px" }}>
-            <div className="list-item-icon">
-              <Settings size={16} />
-            </div>
-            <div className="list-item-body">
-              <div className="list-item-title text-sm">Workspace</div>
-              <div className="list-item-subtitle">Free plan</div>
+          <div className="sidebar-user">
+            <Avatar name="Workspace User" size="sm" />
+            <div className="sidebar-user-info">
+              <div className="sidebar-user-name">Workspace</div>
+              <div className="sidebar-user-plan">Free plan</div>
             </div>
           </div>
         </div>

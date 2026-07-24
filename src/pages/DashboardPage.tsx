@@ -1,11 +1,4 @@
-import {
-  Rocket,
-  Store,
-  Boxes,
-  Activity,
-  TrendingUp,
-  Clock,
-} from "lucide-react";
+import { Boxes, Rocket, Store, Clock, RefreshCw, ArrowUpRight } from "lucide-react";
 import { PageHeader } from "@/components/common";
 import { Card, CardHeader, Badge, Button } from "@/components/ui";
 import { useApp } from "@/state/AppContext";
@@ -32,8 +25,8 @@ export function DashboardPage() {
         title="Dashboard"
         subtitle="Overview of your automation platform activity."
         action={
-          <Button onClick={() => showToast("Refreshed dashboard data", "success")}>
-            <TrendingUp size={16} /> Refresh
+          <Button variant="secondary" onClick={() => showToast("Refreshed dashboard data", "success")}>
+            <RefreshCw size={14} strokeWidth={1.75} /> Refresh
           </Button>
         }
       />
@@ -44,10 +37,12 @@ export function DashboardPage() {
           return (
             <div key={s.label} className="stat-card">
               <div className="stat-card-label">
-                <Icon size={14} /> {s.label}
+                <Icon size={13} strokeWidth={1.75} /> {s.label}
               </div>
               <div className="stat-card-value">{s.value}</div>
-              <div className={`stat-card-trend ${s.up ? "up" : "down"}`}>{s.trend}</div>
+              <div className={`stat-card-trend ${s.up ? "up" : "down"}`}>
+                <ArrowUpRight size={11} strokeWidth={1.75} /> {s.trend}
+              </div>
             </div>
           );
         })}
@@ -59,9 +54,6 @@ export function DashboardPage() {
           <div className="list">
             {recentActivity.map((item, i) => (
               <div className="list-item" key={i}>
-                <div className="list-item-icon">
-                  <Activity size={16} />
-                </div>
                 <div className="list-item-body">
                   <div className="list-item-title">{item.target}</div>
                   <div className="list-item-subtitle">
@@ -88,46 +80,25 @@ export function DashboardPage() {
           <CardHeader title="Quick Actions" />
           <div className="list">
             <div className="list-item">
-              <div className="list-item-icon">
-                <Store size={16} />
-              </div>
               <div className="list-item-body">
                 <div className="list-item-title">Browse Marketplace</div>
-                <div className="list-item-subtitle">
-                  Discover new automation templates
-                </div>
+                <div className="list-item-subtitle">Discover new automation templates</div>
               </div>
-              <Button variant="secondary" size="sm">
-                Open
-              </Button>
+              <Button variant="secondary" size="sm">Open</Button>
             </div>
             <div className="list-item">
-              <div className="list-item-icon">
-                <Rocket size={16} />
-              </div>
               <div className="list-item-body">
                 <div className="list-item-title">Deploy Automation</div>
-                <div className="list-item-subtitle">
-                  Configure and launch a workflow
-                </div>
+                <div className="list-item-subtitle">Configure and launch a workflow</div>
               </div>
-              <Button variant="secondary" size="sm">
-                Start
-              </Button>
+              <Button variant="secondary" size="sm">Start</Button>
             </div>
             <div className="list-item">
-              <div className="list-item-icon">
-                <Boxes size={16} />
-              </div>
               <div className="list-item-body">
                 <div className="list-item-title">View Deployments</div>
-                <div className="list-item-subtitle">
-                  Manage your active automations
-                </div>
+                <div className="list-item-subtitle">Manage your active automations</div>
               </div>
-              <Button variant="secondary" size="sm">
-                View
-              </Button>
+              <Button variant="secondary" size="sm">View</Button>
             </div>
           </div>
         </Card>

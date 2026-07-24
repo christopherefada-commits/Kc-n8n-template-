@@ -1,4 +1,4 @@
-import { Settings2, Save } from "lucide-react";
+import { Save, Settings2 } from "lucide-react";
 import { PageHeader, EmptyState } from "@/components/common";
 import { Card, CardHeader, Button, Input, Select, Toggle, Field } from "@/components/ui";
 import { useApp } from "@/state/AppContext";
@@ -47,10 +47,8 @@ export function ConfigurationPage() {
             onChange={(e) => setApiKey(e.target.value)}
             hint="Used for authenticating deployment requests."
           />
-          <Button
-            onClick={() => showToast("Workspace settings saved", "success")}
-          >
-            <Save size={16} /> Save Settings
+          <Button onClick={() => showToast("Workspace settings saved", "success")}>
+            <Save size={14} strokeWidth={1.75} /> Save Settings
           </Button>
         </Card>
 

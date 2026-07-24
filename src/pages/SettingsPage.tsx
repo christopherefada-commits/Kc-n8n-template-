@@ -37,7 +37,7 @@ export function SettingsPage() {
               onClick={() => setTab(t.id)}
               className={`btn btn-sm ${active ? "btn-primary" : "btn-secondary"}`}
             >
-              <Icon size={15} /> {t.label}
+              <Icon size={14} strokeWidth={1.75} /> {t.label}
             </button>
           );
         })}
@@ -49,7 +49,7 @@ export function SettingsPage() {
           <Input label="Full Name" value={name} onChange={(e) => setName(e.target.value)} />
           <Input label="Email Address" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           <Button onClick={() => showToast("Profile updated", "success")}>
-            <Settings size={16} /> Save Profile
+            <Settings size={14} strokeWidth={1.75} /> Save Profile
           </Button>
         </Card>
       )}
@@ -101,7 +101,7 @@ export function SettingsPage() {
           <Input label="New Password" type="password" placeholder="••••••••" />
           <Input label="Confirm New Password" type="password" placeholder="••••••••" />
           <Button onClick={() => showToast("Password updated", "success")}>
-            <Shield size={16} /> Update Password
+            <Shield size={14} strokeWidth={1.75} /> Update Password
           </Button>
         </Card>
       )}

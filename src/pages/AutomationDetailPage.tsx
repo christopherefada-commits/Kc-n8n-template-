@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Clock, GitBranch, Package, CircleCheck as CheckCircle2, CircleAlert as AlertCircle, Loader as Loader2, Settings, Zap } from "lucide-react";
+import { ArrowLeft, Clock, GitBranch, Package, CircleCheck as CheckCircle2, CircleAlert as AlertCircle, Loader as Loader2, Settings, Zap, FileText } from "lucide-react";
 import {
   loadAutomation,
   ConfigurationEngine,
@@ -106,11 +106,13 @@ export function AutomationDetailPage() {
   return (
     <div>
       <button className="detail-back" onClick={() => navigate("/")}>
-        <ArrowLeft size={16} /> Back to catalog
+        <ArrowLeft size={14} strokeWidth={1.75} /> Back to catalog
       </button>
 
       <div className="detail-header">
-        <span className="detail-icon">{automation.icon}</span>
+        <div className="detail-icon">
+          <FileText size={18} strokeWidth={1.75} />
+        </div>
         <div style={{ flex: 1 }}>
           <h1 className="detail-title">{automation.name}</h1>
           <p className="detail-desc">{automation.description}</p>
@@ -133,7 +135,7 @@ export function AutomationDetailPage() {
         {/* Left: config form */}
         <div className="detail-section">
           <h2 className="detail-section-title">
-            <Settings size={18} /> Configuration
+            <Settings size={15} strokeWidth={1.75} /> Configuration
           </h2>
           <p style={{ fontSize: 14, color: "var(--color-text-muted)", marginBottom: 16 }}>
             {form.summary}
@@ -230,11 +232,11 @@ export function AutomationDetailPage() {
             >
               {deploying ? (
                 <>
-                  <Loader2 size={16} className="spin" /> Deploying…
+                  <Loader2 size={14} strokeWidth={1.75} className="spin" /> Deploying…
                 </>
               ) : (
                 <>
-                  <Zap size={16} /> Deploy Automation
+                  <Zap size={14} strokeWidth={1.75} /> Deploy Automation
                 </>
               )}
             </button>
@@ -245,7 +247,7 @@ export function AutomationDetailPage() {
               className="toast success"
               style={{ position: "static", boxShadow: "none", marginTop: 16 }}
             >
-              <CheckCircle2 size={18} color="var(--color-success)" />
+              <CheckCircle2 size={16} strokeWidth={1.75} color="var(--color-success)" />
               Deployment created successfully.{" "}
               <button
                 className="btn btn-secondary"
@@ -261,7 +263,7 @@ export function AutomationDetailPage() {
               className="toast error"
               style={{ position: "static", boxShadow: "none", marginTop: 16 }}
             >
-              <AlertCircle size={18} color="var(--color-error)" />
+              <AlertCircle size={16} strokeWidth={1.75} color="var(--color-error)" />
               {deployResult.message}
             </div>
           )}
@@ -271,7 +273,7 @@ export function AutomationDetailPage() {
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div className="detail-section">
             <h2 className="detail-section-title">
-              <Package size={18} /> Integrations
+              <Package size={15} strokeWidth={1.75} /> Integrations
             </h2>
             {automation.integrations.length > 0 ? (
               <div className="integration-list">
@@ -290,7 +292,7 @@ export function AutomationDetailPage() {
 
           <div className="detail-section">
             <h2 className="detail-section-title">
-              <Settings size={18} /> Saved Configurations
+              <Settings size={15} strokeWidth={1.75} /> Saved Configurations
             </h2>
             {savedConfigs.length === 0 ? (
               <p style={{ color: "var(--color-text-muted)", fontSize: 14 }}>

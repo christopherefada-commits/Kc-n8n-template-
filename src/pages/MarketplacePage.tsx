@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { Store, Search, Clock, GitBranch, Package } from "lucide-react";
+import { Store, Search, Clock, GitBranch, Package, FileText } from "lucide-react";
 import { PageHeader, EmptyState } from "@/components/common";
 import { Card, Badge, Input } from "@/components/ui";
 import { loadCatalog, type AutomationCatalog } from "@platform";
@@ -56,7 +56,8 @@ export function MarketplacePage() {
       <div className="flex items-center gap-3 mb-4" style={{ flexWrap: "wrap" }}>
         <div style={{ position: "relative", flex: 1, maxWidth: 400 }}>
           <Search
-            size={16}
+            size={15}
+            strokeWidth={1.75}
             style={{
               position: "absolute",
               left: 11,
@@ -105,7 +106,9 @@ export function MarketplacePage() {
           {automations.map((a) => (
             <Card key={a.id} hover onClick={() => navigate(`/automation/${a.id}`)}>
               <div className="flex items-center gap-2 mb-4">
-                <span style={{ fontSize: 26 }}>{a.icon}</span>
+                <div className="list-item-icon" style={{ width: 28, height: 28 }}>
+                  <FileText size={15} strokeWidth={1.75} />
+                </div>
                 <span
                   style={{
                     fontWeight: 600,
@@ -134,13 +137,13 @@ export function MarketplacePage() {
               <div className="flex gap-2" style={{ flexWrap: "wrap" }}>
                 <Badge variant="primary">{a.category}</Badge>
                 <Badge>
-                  <Clock size={11} /> {a.estimatedSetupTime}m
+                  <Clock size={10} strokeWidth={1.75} /> {a.estimatedSetupTime}m
                 </Badge>
                 <Badge>
-                  <GitBranch size={11} /> {a.nodeCount}
+                  <GitBranch size={10} strokeWidth={1.75} /> {a.nodeCount}
                 </Badge>
                 <Badge>
-                  <Package size={11} /> v{a.version}
+                  <Package size={10} strokeWidth={1.75} /> v{a.version}
                 </Badge>
               </div>
             </Card>

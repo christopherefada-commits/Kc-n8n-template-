@@ -1,4 +1,4 @@
-import { LayoutGrid, List as ListIcon, ArrowUpDown } from "lucide-react";
+import { LayoutGrid, List as ListIcon, ArrowUpDown, Search } from "lucide-react";
 import type { SortKey } from "@platform";
 
 interface RepositoryToolbarProps {
@@ -33,45 +33,32 @@ export function RepositoryToolbar({
   resultCount,
 }: RepositoryToolbarProps) {
   return (
-    <div
-      className="flex items-center gap-3 mb-4"
-      style={{ flexWrap: "wrap" }}
-    >
-      <div style={{ position: "relative", flex: 1, maxWidth: 400 }}>
-        <input
-          className="input-field"
-          style={{ paddingLeft: 36 }}
-          placeholder="Search by name, description, or tag…"
-          value={search}
-          onChange={(e) => onSearchChange(e.target.value)}
-        />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+    <div className="flex items-center gap-3 mb-4" style={{ flexWrap: "wrap" }}>
+      <div style={{ position: "relative", flex: 1, maxWidth: 360 }}>
+        <Search
+          size={15}
+          strokeWidth={1.75}
           style={{
             position: "absolute",
-            left: 11,
+            left: 10,
             top: "50%",
             transform: "translateY(-50%)",
             color: "var(--color-text-dim)",
           }}
-        >
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.3-4.3" />
-        </svg>
+        />
+        <input
+          className="input-field"
+          style={{ paddingLeft: 32 }}
+          placeholder="Search by name, description, or tag"
+          value={search}
+          onChange={(e) => onSearchChange(e.target.value)}
+        />
       </div>
 
       <div className="flex items-center gap-2">
         <select
           className="input-field"
-          style={{ width: "auto", minWidth: 140 }}
+          style={{ width: "auto", minWidth: 130 }}
           value={sort}
           onChange={(e) => onSortChange(e.target.value as SortKey)}
         >
@@ -87,13 +74,13 @@ export function RepositoryToolbar({
           aria-label="Toggle sort direction"
           title={sortDir === "asc" ? "Ascending" : "Descending"}
         >
-          <ArrowUpDown size={16} />
+          <ArrowUpDown size={15} strokeWidth={1.75} />
         </button>
       </div>
 
       <div className="flex items-center gap-1">
         <button
-          className={`icon-button ${view === "grid" ? "" : ""}`}
+          className="icon-button"
           onClick={() => onViewChange("grid")}
           aria-label="Grid view"
           title="Grid view"
@@ -103,7 +90,7 @@ export function RepositoryToolbar({
               : {}
           }
         >
-          <LayoutGrid size={18} />
+          <LayoutGrid size={16} strokeWidth={1.75} />
         </button>
         <button
           className="icon-button"
@@ -116,7 +103,7 @@ export function RepositoryToolbar({
               : {}
           }
         >
-          <ListIcon size={18} />
+          <ListIcon size={16} strokeWidth={1.75} />
         </button>
       </div>
 

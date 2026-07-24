@@ -75,7 +75,7 @@ export function RepositoryPage() {
     <div>
       <PageHeader
         title="Automation Repository"
-        subtitle="Every n8n workflow in the repository, automatically scanned and indexed as an installable template. Add new workflow JSON files to the repository and re-run the scanner to include them here."
+        subtitle="Automatically scanned and indexed n8n workflow templates. Add new workflow JSON files to the repository and re-run the scanner to include them."
       />
 
       <RepositoryStats stats={stats} />
